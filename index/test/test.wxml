@@ -1,0 +1,10 @@
+<!--index/test/test.wxml-->
+<view class='list'>
+  <swiper indicator-dots="{{true}}" autoplay="{{false}}" circular="{{circular}}" previous-margin="{{'140rpx'}}" next-margin="{{'140rpx'}}" bindchange="swiperChange">
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image {{swiperIndex == index ? 'active' : ''}}"/>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

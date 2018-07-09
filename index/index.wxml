@@ -1,0 +1,25 @@
+<view class="container">
+  <view class="page-body">
+    <view class="page-section page-section-spacing swiper">
+      <swiper
+        indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
+        interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" bindanimationfinish='todos'>
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <block wx:if="{{  nCurrentView == index }}">
+              <view style="height:{{ nCurrentViewHeight }}rpx" class="swiper-item {{item}}" id='{{ index }}' bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMove'></view>
+            </block>
+
+            <block wx:elif="{{ nChangeView == index }}">
+              <view style="height:{{ nNextViewHeight }}rpx" class="swiper-item {{item}}" id='{{ index }}' bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMove'></view>
+            </block>
+
+            <block wx:else>
+              <view style="height:{{ nLastViewHeight }}rpx" class="swiper-item {{item}}" id='{{ index }}' bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMove'></view>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+</view>
