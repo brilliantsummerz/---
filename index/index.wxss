@@ -114,13 +114,19 @@ button:last-child {
 
 .swiper-item {
   display: block;
-  height: 300rpx;
+  height: 250rpx;
   margin-left: 10rpx;
   margin-right: 10rpx;
   border-radius: 10rpx;
+  box-sizing: border-box;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.swiper-item.active {
+  transform: scale(1.2);
+  transition: all 0.2s ease-in 0s;
 }
 
 .page-section-title {

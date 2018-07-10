@@ -1,6 +1,8 @@
 //最小滚动距离137
 const minDistance = 137;
 var lastX = 0;
+var startTime = '';
+
 Page({
   data: {
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
@@ -11,58 +13,63 @@ Page({
     interval: 2000,
     duration: 500,
     previousMargin: 50,
-    nextMargin: 50
-    , nCurrentView: 0 // 当前view值
-    , startX: 0
-    , EndX: 0
-    , nViewHeight: 250
-    , sDirection: 'left'
-    , nChangeView: 1
-    , bIsStop: true
-    , nLastViewHeight: 250
-    , nNextViewHeight: 250
-    , nCurrentViewHeight: 300
+    nextMargin: 50,
+    nCurrentView: 0 // 当前view值
+      ,
+    startX: 0,
+    EndX: 0,
+    nViewHeight: 250,
+    sDirection: 'left',
+    nChangeView: 1,
+    bIsStop: true,
+    nLastViewHeight: 250,
+    nNextViewHeight: 250,
+    nCurrentViewHeight: 300
   },
-  changeProperty: function (e) {
+  changeProperty: function(e) {
     var propertyName = e.currentTarget.dataset.propertyName
     var newData = {}
     newData[propertyName] = e.detail.value
     this.setData(newData)
   },
-  changeIndicatorDots: function (e) {
+  changeIndicatorDots: function(e) {
     this.setData({
       indicatorDots: !this.data.indicatorDots
     })
   },
-  changeAutoplay: function (e) {
+  changeAutoplay: function(e) {
     this.setData({
       autoplay: !this.data.autoplay
     })
   },
-  intervalChange: function (e) {
+  intervalChange: function(e) {
     this.setData({
       interval: e.detail.value
     })
   },
-  durationChange: function (e) {
+  durationChange: function(e) {
     this.setData({
       duration: e.detail.value
     })
   },
   todos(event) {
-    console.log(event);
+    // console.log(event);
     var currentView = event.detail.current;
     this.setData({
-      nCurrentView: currentView
-      , nCurrentViewHeight: 300
+      nCurrentView: currentView,
+      nCurrentViewHeight: 300
     })
   },
   touchStart(e) {
+    var myDate = new Date();
+    startTime = myDate;
+
     // console.log('触摸开始');
     // console.log(e);
     var page = e.touches[0];
     var pageX = page.pageX;
     var pageY = page.pageY;
+
     // console.log('pageX', pageX);
     // console.log('pageY', pageY);
     this.setData({
@@ -81,7 +88,7 @@ Page({
     if (startX - pageX > 0) {
       let pullDistance = (250 + (startX - pageX) / 3 >= 300) ? 300 : (250 + (startX - pageX) / 3);
       let nCurrentViewHeight = (300 - (startX - pageX) / 3 <= 250) ? 250 : (300 - (startX - pageX) / 3);
-      console.log(nCurrentViewHeight);
+      // console.log(nCurrentViewHeight);
       switch (nCurrentView) {
         case 0:
           that.setData({
@@ -115,17 +122,47 @@ Page({
 
     } else if (startX - pageX <= 0) {
       let pullDistance = (250 - (startX - pageX) / 3 >= 300) ? 300 : (250 - (startX - pageX) / 3);
-      // console.log(pullDistance);
-      // that.setData({
-      //   sDirection: 'right',
-      //   nViewHeight: pullDistance
-      // })
+      let nCurrentViewHeight = (300 + (startX - pageX) / 3 <= 250) ? 250 : (300 + (startX - pageX) / 3);
+      console.log(nCurrentViewHeight);
+      switch (nCurrentView) {
+        case 0:
+          that.setData({
+            sDirection: 'right',
+            nLastViewHeight: 250,
+            nNextViewHeight: pullDistance,
+            nCurrentViewHeight: nCurrentViewHeight,
+            nChangeView: 2
+          })
+          break;
+        case 1:
+          that.setData({
+            sDirection: 'right',
+            nLastViewHeight: 250,
+            nNextViewHeight: pullDistance,
+            nCurrentViewHeight: nCurrentViewHeight,
+            nChangeView: 0
+          })
+          break;
+        case 2:
+          that.setData({
+            sDirection: 'right',
+            nLastViewHeight: 250,
+            nNextViewHeight: pullDistance,
+            nCurrentViewHeight: nCurrentViewHeight,
+            nChangeView: 1
+          })
+          break;
+      }
+
     }
-    console.log(that.data.sDirection);
+    // console.log(that.data.sDirection);
     // console.log('pageX', pageX);
     // console.log('pageY', pageY);
   },
   touchEnd(e) {
+    var myDate = new Date();
+    var difTime = myDate - startTime;
+    console.log(difTime);
     console.log('触摸结束');
     // console.log(e);
     // var page = e.touches[0];

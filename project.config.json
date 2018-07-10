@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.94",
 	"appid": "touristappid",
-	"projectname": "swiper%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B",
+	"projectname": "swiper",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -35,15 +35,9 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
+					"id": 1,
 					"name": "1",
-					"pathName": "index/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "1",
-					"pathName": "index/index",
+					"pathName": "index/test/test",
 					"query": ""
 				}
 			]
