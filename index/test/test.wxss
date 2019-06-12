@@ -1,19 +1,19 @@
 /* index/test/test.wxss */
-swiper{
+
+swiper {
   width: 750rpx;
   height: 500rpx;
 }
- swiper-item{
+
+swiper-item {
   padding-top: 100rpx;
-} 
-image{
-  width: 375rpx;
-  height: 350rpx;
-  position: absolute;
-  left: 50%;
-  margin-left: -188rpx;
+  width: 100rpx !important;
 }
-image.active{
-  transform: scale(1.2);
-  transition:all .2s ease-in 0s;
+
+image {
+  width: 100rpx;
+  height: 150rpx;
+  position: absolute;
+  /* left: 50%; */
+  /* margin-left: -188rpx; */
 }
